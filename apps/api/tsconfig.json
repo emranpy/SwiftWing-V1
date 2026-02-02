@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    
+    // 1. Explicitly set the root to src to fix your error
+    "rootDir": "./src", 
+    "outDir": "./dist",
+
+    "allowImportingTsExtensions": false, 
+    "noEmit": false, 
+
+    "target": "esnext",
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"],
+ 
+  "exclude": ["node_modules", "dist"]
+}
