@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Airplane extends Model {
     /**
@@ -13,18 +11,25 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Airplane.init({
-    modelNumber:{
-      type: DataTypes.INTEGER,
-      allowNull: false
+  Airplane.init(
+    {
+      modelNumber: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        set(val) {
+          // We convert to string first, then trim, to prevent the "trim is not a function" error
+          this.setDataValue("modelNumber", String(val).trim());
+        },
+      },
+      capacity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
-    capacity:{
-      type:  DataTypes.INTEGER,
-      allowNull: false
-    }
-  }, {
-    sequelize,
-    modelName: 'Airplane',
-  });
+    {
+      sequelize,
+      modelName: "Airplane",
+    },
+  );
   return Airplane;
 };

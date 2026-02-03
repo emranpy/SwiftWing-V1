@@ -5,6 +5,8 @@ const PORT = process.env.PORT || 5000;
 
 // middleware (parses JSON)
 app.use(express.json());
+app.use(express.urlencoded())
+
 app.use("/api", apiRoute)
 
 // start server

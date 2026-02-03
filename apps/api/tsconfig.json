@@ -2,7 +2,9 @@
   "compilerOptions": {
     "module": "nodenext",
     "moduleResolution": "nodenext",
-    
+    "allowJs": true,
+    "checkJs": false,
+    "noImplicitAny": false,
     // 1. Explicitly set the root to src to fix your error
     "rootDir": "./src", 
     "outDir": "./dist",
