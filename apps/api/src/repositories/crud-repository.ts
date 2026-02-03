@@ -9,13 +9,8 @@ export class CrudRepository<T extends any> {
     }
 
     async create(data: object) {
-        try {
-            const response = await this.model.create(data);
-            return response;
-        } catch (error) {
-            logger.error(`[CrudRepository: Create Error]:`, error);
-            throw error;
-        }
+        const response = await this.model.create(data);
+        return response;
     }
 
     async destroy(id: number | string) {
@@ -54,8 +49,8 @@ export class CrudRepository<T extends any> {
         try {
             const response = await this.model.update(data, {
                 where: { id: id },
-                returning: true, 
-                plain: true      
+                returning: true,
+                plain: true
             });
             return response;
         } catch (error) {

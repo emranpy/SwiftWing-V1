@@ -1,11 +1,12 @@
+import { z } from "zod";
+import { ValidationMessages } from "./errorMessages.js";
 
-import { z } from 'zod';
-
-// Define a schema for a flight
 export const AirplaneSchema = z.object({
-  modelNumber: z.string(),
-  capacity: z.number()
+   modelNumber: z.string({
+      required_error: ValidationMessages.AIRPLANE.MODEL_REQUIRED,
+   }).min(3, ValidationMessages.AIRPLANE.MODEL_LENGTH),
+   
+   capacity: z.number({
+      required_error: ValidationMessages.AIRPLANE.CAPACITY_REQUIRED,
+   }).min(1, ValidationMessages.AIRPLANE.CAPACITY_MIN),
 });
-
-// Export the type so the API can use it too!
-export type airplaneSchema = z.infer<typeof AirplaneSchema>;

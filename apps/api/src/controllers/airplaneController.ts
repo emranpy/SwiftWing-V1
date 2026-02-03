@@ -1,8 +1,11 @@
 
 import { createAirplaneService } from "../services/index.js"
-import { type Request, type Response } from "express";
-import { AirplaneSchema } from "@swiftwing/validation";
+import { type Request, type Response, type NextFunction } from "express";
+import { AirplaneSchema, ValidationMessages } from "@swiftwing/validation";
 import { StatusCodes } from "http-status-codes";
+import { ErrorResponse, SuccessResponse } from "../utils/responses/index.js";
+import { AppError } from "../utils/Errors/errors.js";
+
 
 /**
  * 
@@ -10,36 +13,28 @@ import { StatusCodes } from "http-status-codes";
  * req.body {modelNumber: "boing-787", capacity: 100}
  * 
  */
-export const createAirplane = async (req: Request, res: Response) => {
+export const createAirplane = async (req: Request, res: Response, next: NextFunction) => {
    const isValid = AirplaneSchema.safeParse({
       modelNumber: req.body?.modelNumber,
       capacity: req.body?.capacity
    })
 
    if (!isValid.success) {
-      console.log(isValid.error)
-      return res.status(StatusCodes.BAD_REQUEST).json({
-         success: false,
-         message: "Validation Error Model number and Capacity is Required",
-         data: {},
-         error: {}
-      })
+      const explanation = isValid.error.errors
+         .map((err) => err.message)
+         .join(", ");
+      return next(new AppError(ValidationMessages.AIRPLANE.VALIDATION_ERROR, StatusCodes.BAD_REQUEST, explanation))
    }
 
    try {
       const response = await createAirplaneService(isValid.data)
-      res.status(StatusCodes.CREATED).json({
-         success: true,
-         message: "Airplane Created Successfully",
-         data: response,
-         error: {}
-      })
-   } catch (error) {
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-         success: false,
-         message: "Something went wrong on the server",
-         data: {},
-         error: error
-      })
+      return res.status(StatusCodes.CREATED).json(new SuccessResponse(response, "Airplane Created Successfully"));
    }
+   catch (error) {
+      throw new AppError("Server Error", StatusCodes.INTERNAL_SERVER_ERROR,)
+   }
+}
+
+export const UpdateAirplane = async (req: Request, res: Response) => {
+
 }
