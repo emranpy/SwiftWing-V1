@@ -21,7 +21,7 @@ export const createAirplaneService = async (data: object) => {
 }
 
 // /api/v1/airplane/:id  -> PATCH
-export const updateAirplaneService = async (id: number , data: object) => {
+export const updateAirplaneService = async (id: number, data: object) => {
     try {
         const response = await airplaneRepository.update(id, data);
         if (!response || response[0] === 0) {
@@ -37,6 +37,49 @@ export const updateAirplaneService = async (id: number , data: object) => {
 }
 
 // /api/v1/airplane/:id  -> DELETE
-// export const DeleteAirplaneService = async (id: string | number) => {
+export const DeleteAirplaneService = async (id: number) => {
+    try {
+        const response = await airplaneRepository.destroy(id);
+        if (!response || response[0] === 0) {
+            throw new AppError("The airplane you are trying to update was not found", StatusCodes.NOT_FOUND);
+        }
 
-// }
+        return response;
+
+    } catch (error) {
+        if (error instanceof AppError) throw error;
+        throw new AppError("Internal Server Error during update", StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
+// /api/v1/airplane/  -> Get
+export const getAirplanesService = async () => {
+    try {
+        const response = await airplaneRepository.getAll();
+        if (!response || response[0] === 0) {
+            throw new AppError("The airplane you are trying to update was not found", StatusCodes.NOT_FOUND);
+        }
+
+        return response;
+
+    } catch (error) {
+        if (error instanceof AppError) throw error;
+        throw new AppError("Internal Server Error during update", StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
+
+// /api/v1/airplane/:id  -> Get
+export const getAirplaneService = async (id: number) => {
+    try {
+        const response = await airplaneRepository.get(id);
+        if (!response || response[0] === 0) {
+            throw new AppError("The airplane is not found", StatusCodes.NOT_FOUND);
+        }
+        return response;
+
+    } catch (error) {
+        if (error instanceof AppError) throw error;
+        throw new AppError("Internal Server Error", StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}

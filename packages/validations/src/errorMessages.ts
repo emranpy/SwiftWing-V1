@@ -14,6 +14,9 @@ export const ValidationMessages = {
    },
    GLOBAL: {
       INVALID_INPUT: "The data provided is invalid.",
-      DB_ERROR: "A database error occurred while processing the request."
+      DB_ERROR: "A database error occurred while processing the request.",
+      DATA_NOT_FOUND: "Data Not Found",
+      SERVER_ERROR: "Server Error",
+      NETWORK_ERROR: "Network Error",
    }
 } as const; 
