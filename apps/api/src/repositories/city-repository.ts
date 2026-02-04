@@ -3,7 +3,7 @@ import db from "../models/index.js";
 
 const models = db.default || db;
 
-const City = models.city;
+const City = models.City;
 
 if (!City) {
     console.error("❌ ERROR: City model not found! Check your models/index.js exports.");

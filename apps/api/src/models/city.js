@@ -1,28 +1,28 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class city extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+  class City extends Model {
     static associate(models) {
-      // define association here
+      // 1. Tell City it has many Airports
+      // Use models.Airport (Capitalized) to match your other model's name
+      this.hasMany(models.Airport, {
+        foreignKey: "cityId",
+        as: "airports",
+      });
     }
   }
-  city.init(
+  City.init(
     {
-      name: { 
-        type: DataTypes.STRING ,
+      name: {
+        type: DataTypes.STRING,
         unique: true,
         allowNull: false,
       },
     },
     {
       sequelize,
-      modelName: "city",
+      modelName: "City",
     },
   );
-  return city;
+  return City;
 };

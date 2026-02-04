@@ -1,20 +1,12 @@
 import express from "express";
 import { createCity, updateCity, deleteCity, getAllCities, getCity } from "../../controllers/index.js"
 
-const routes = express.Router()
+const router = express.Router()
 
-//create a city 
-routes.post("/", createCity)
+router.post('/', createCity);        // POST /api/v1/city
+router.get('/', getAllCities);       // GET  /api/v1/city
+router.get('/:id', getCity);         // GET  /api/v1/city/123
+router.patch('/:id', updateCity);    // PATCH /api/v1/city/123
+router.delete('/:id', deleteCity);   // DELETE /api/v1/city/123
 
-//update city 
-routes.patch("/:id", updateCity)
-
-//delete city
-routes.delete("/:id", deleteCity)
-
-//get all city
-routes.get("/", getAllCities)
-
-//get a single city
-routes.get("/:id", getCity)
-export default routes;
+export default router;
