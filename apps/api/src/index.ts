@@ -1,3 +1,4 @@
+
 import express, { type Request, type Response, type NextFunction } from "express";
 import apiRoute from "./routes/index.js";
 import { AppError } from "./utils/Errors/errors.js"; // Import your class
@@ -10,6 +11,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", apiRoute);
+
+
 
 /**
  * THE SUPERVISOR (Global Error Handler)

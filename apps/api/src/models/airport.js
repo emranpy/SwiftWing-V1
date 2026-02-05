@@ -4,9 +4,19 @@ module.exports = (sequelize, DataTypes) => {
   class Airport extends Model {
     static associate(models) {
       this.belongsTo(models.City, {
-       
         foreignKey: "cityId",
         as: "cityDetails",
+      });
+
+      this.hasMany(models.Flight, {
+        foreignKey: "departureAirportId",
+        as: "departingFlights",
+      });
+
+      // To see all flights ARRIVING at this airport
+      this.hasMany(models.Flight, {
+        foreignKey: "arrivalAirportId",
+        as: "arrivingFlights",
       });
     }
   }
