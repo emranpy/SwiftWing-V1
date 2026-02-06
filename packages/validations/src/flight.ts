@@ -4,8 +4,11 @@ import { ValidationMessages } from "./errorMessages.js";
 export const FlightSchema = z.object({
     flightNumber: z.string({ required_error: ValidationMessages.FLIGHT.CODE_REQUIRED }),
     airplaneId: z.number({ required_error: ValidationMessages.FLIGHT.AIRPLANE_ID_REQUIRED }),
-    departureAirportId: z.number({ required_error: ValidationMessages.FLIGHT.DEPARTURE_AIRPORTID_REQUIRED }),
-    arrivalAirportId: z.number({ required_error: ValidationMessages.FLIGHT.ARRIVAL_AIRPORT_ID_REQUIRED }),
+
+    // FIXED: Changed from z.number() to z.string()
+    departureAirportId: z.string({ required_error: ValidationMessages.FLIGHT.DEPARTURE_AIRPORTID_REQUIRED }),
+    arrivalAirportId: z.string({ required_error: ValidationMessages.FLIGHT.ARRIVAL_AIRPORT_ID_REQUIRED }),
+
     arrivalTime: z.coerce.date({
         required_error: "Arrival time is required",
         invalid_type_error: "Arrival time must be a valid date",

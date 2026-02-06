@@ -32,7 +32,9 @@ export const createFlight = async (req: Request, res: Response, next: NextFuncti
 // 2. READ (Get All)
 export const getAllFlight = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const response = await getAllFlightService();
+        
+        const response = await getAllFlightService(req.query);
+
         return res.status(StatusCodes.OK).json(
             new SuccessResponse(response, "Flights Fetched Successfully")
         );

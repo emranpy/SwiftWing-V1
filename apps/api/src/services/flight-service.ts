@@ -42,13 +42,35 @@ export const deleteFlightService = async (id: number) => {
     }
 }
 
-// --- GET ALL ---
-export const getAllFlightService = async () => {
+
+// --- GET ALL SERVICE ---
+export const getAllFlightService = async (query: any) => {
+    let customFilter: any = {};
+
+    // 1. Logic for ?trips=DEL-BOM
+    if (query.trips) {
+        const [departureId, arrivalId] = query.trips.split("-");
+        
+        // Ensure we don't try to fly to the same place
+        if (departureId === arrivalId) {
+            throw new AppError("Departure and Arrival cannot be the same", StatusCodes.BAD_REQUEST);
+        }
+
+        customFilter.departureAirportId = departureId;
+        customFilter.arrivalAirportId = arrivalId;
+    }
+
+    // 2. Logic for ?price=5000 (Exact price match)
+    if (query.price) {
+        customFilter.price = query.price;
+    }
+
     try {
-        const response = await flightService.getAll();
+        // We pass the filter object to our repository method
+        const response = await flightService.getAllFlights(customFilter);
         return response;
     } catch (error: any) {
-        throw new AppError("Could not fetch Flight", StatusCodes.INTERNAL_SERVER_ERROR);
+        throw new AppError("Could not fetch Flights", StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
 
