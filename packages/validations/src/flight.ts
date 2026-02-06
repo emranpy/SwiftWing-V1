@@ -16,7 +16,7 @@ export const FlightSchema = z.object({
     }),
     price: z.number({ required_error: ValidationMessages.FLIGHT.PRICE_REQUIRED }),
     boardingGate: z.string({ required_error: ValidationMessages.FLIGHT.BOARDING_GATE_REQUIRED }),
-    totalSeat: z.number({ required_error: ValidationMessages.FLIGHT.TOTAL_SEAT_REQUIRED })
+    totalSeats: z.number({ required_error: ValidationMessages.FLIGHT.TOTAL_SEAT_REQUIRED })
 }).refine((data) => data.arrivalTime > data.departureTime, {
     message: "Arrival time must be strictly after departure time",
     path: ["arrivalTime"],

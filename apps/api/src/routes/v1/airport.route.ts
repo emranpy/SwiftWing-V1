@@ -1,5 +1,5 @@
 import express from "express";
-import { createAirport, getAllAirport} from "../../controllers/index.js";
+import { createAirport, getAllAirport, updateAirport, getAirport } from "../../controllers/index.js";
 
 const routes = express.Router();
 
@@ -10,9 +10,9 @@ routes.post("/", createAirport)
 routes.get("/", getAllAirport)
 
 // //update Airplane
-// routes.patch("/:id", UpdateAirplane)
+routes.patch("/:id", updateAirport)
 
 // // get a single airplane
-// routes.get("/:id", getAirplane)
+routes.get("/:id", getAirport)
 
 export default routes
