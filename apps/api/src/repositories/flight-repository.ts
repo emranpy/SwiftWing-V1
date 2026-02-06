@@ -3,11 +3,11 @@ import db from "../models/index.js";
 
 const models = db.default || db;
 
-const City = models.City;
+const Flight = models.Flight;
 
 
-export class CityRepository extends CrudRepository<any> {
+export class FlightRepository extends CrudRepository<any> {
     constructor() {
-        super(City);
+        super(Flight);
     }
 }

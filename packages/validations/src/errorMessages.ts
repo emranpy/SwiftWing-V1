@@ -11,6 +11,12 @@ export const ValidationMessages = {
    FLIGHT: {
       CODE_REQUIRED: "Flight code is required (e.g., AI-101).",
       TIME_INVALID: "Arrival time must be after departure time.",
+      AIRPLANE_ID_REQUIRED: "Airplane id is required",
+      DEPARTURE_AIRPORTID_REQUIRED: "departure AirportId is required",
+      ARRIVAL_AIRPORT_ID_REQUIRED: "Arrival Airport id is required",
+      PRICE_REQUIRED: "Price is required",
+      BOARDING_GATE_REQUIRED: 'Bording gate is required',
+      TOTAL_SEAT_REQUIRED: 'Total seat is required'
    },
    GLOBAL: {
       INVALID_INPUT: "The data provided is invalid.",
@@ -18,6 +24,7 @@ export const ValidationMessages = {
       DATA_NOT_FOUND: "Data Not Found",
       SERVER_ERROR: "Server Error",
       NETWORK_ERROR: "Network Error",
+      VALIDATION_ERROR: "Input Validation Error"
    },
 
    AIRPORT: {
@@ -25,4 +32,7 @@ export const ValidationMessages = {
       MODEL_LENGTH: "Model number must be between 3 and 20 characters.",
       VALIDATION_ERROR: "Validation Error"
    },
+
+   
+  
 } as const; 
