@@ -18,5 +18,11 @@ export const ValidationMessages = {
       DATA_NOT_FOUND: "Data Not Found",
       SERVER_ERROR: "Server Error",
       NETWORK_ERROR: "Network Error",
-   }
+   },
+
+   AIRPORT: {
+      MODEL_REQUIRED: "Airport model number is required and must be a string.",
+      MODEL_LENGTH: "Model number must be between 3 and 20 characters.",
+      VALIDATION_ERROR: "Validation Error"
+   },
 } as const; 
