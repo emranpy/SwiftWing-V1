@@ -45,6 +45,15 @@ export class CrudRepository<T extends any> {
         }
     }
 
+    async find(name: string) {
+        try {
+            const response = await this.model.findOne({ where: { name } });
+            return response;
+        } catch (error) {
+            logger.error(`[CrudRepository: Find Error]: ${error}`);
+            throw error;
+        }
+    }
     async update(id: number | string, data: object) {
         try {
             const response = await this.model.update(data, {

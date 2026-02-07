@@ -47,10 +47,17 @@ export const deleteFlightService = async (id: number) => {
 export const getAllFlightService = async (query: any) => {
     let customFilter: any = {};
 
+    if (query.date) {
+        const [startingDate, endDate] = query.date.split("-");
+        customFilter.departureTime = {
+            gte: startingDate,
+            lte: endDate
+        }
+    }
     // 1. Logic for ?trips=DEL-BOM
     if (query.trips) {
         const [departureId, arrivalId] = query.trips.split("-");
-        
+
         // Ensure we don't try to fly to the same place
         if (departureId === arrivalId) {
             throw new AppError("Departure and Arrival cannot be the same", StatusCodes.BAD_REQUEST);

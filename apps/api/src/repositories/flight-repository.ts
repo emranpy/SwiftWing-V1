@@ -34,4 +34,14 @@ export class FlightRepository extends CrudRepository<any> {
             throw error;
         }
     }
+
+    async findFlightWithCode(code: string) {
+        try {
+            const response = await Flight.findOne({ where: { code } });
+            return response;
+        } catch (error) {
+            console.error("Repository Error:", error);
+            throw error;
+        }
+    }
 }

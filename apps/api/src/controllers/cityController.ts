@@ -1,14 +1,26 @@
-import { 
-    createCityService, 
-    getAllCitiesService, 
-    getCityService, 
-    updateCityService, 
-    deleteCityService 
+import {
+    createCityService,
+    getAllCitiesService,
+    getCityService,
+    updateCityService,
+    deleteCityService
 } from "../services/index.js";
 import { type Request, type Response, type NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
 import { SuccessResponse } from "../utils/responses/index.js";
 import { AppError } from "../utils/Errors/errors.js";
+
+
+// export const searchCity = async (req: Request, res: Response, next: NextFunction) => {
+//     try {
+//         const response = await searchCityService(req.query.name as string);
+//         return res.status(StatusCodes.OK).json(
+//             new SuccessResponse(response, "City Searched Successfully")
+//         );
+//     } catch (error) {
+//         next(error);
+//     }
+// }
 
 // 1. CREATE
 export const createCity = async (req: Request, res: Response, next: NextFunction) => {
@@ -22,7 +34,7 @@ export const createCity = async (req: Request, res: Response, next: NextFunction
             new SuccessResponse(response, "City Created Successfully")
         );
     } catch (error) {
-        next(error); 
+        next(error);
     }
 };
 

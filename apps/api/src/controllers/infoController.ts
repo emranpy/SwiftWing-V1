@@ -13,4 +13,7 @@ const getInfoData = (req: Request, res: Response) => {
     });
 };
 
+
+
+
 export { getInfoData };
